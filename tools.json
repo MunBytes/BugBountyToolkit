@@ -4,7 +4,7 @@
         "description": "sublist3r is security tool designed to enumerate subdomains of websites using OSINT.",
         "check_command": "sublist3r --version",
         "installation": {
-            "linux": ["apt install sublist3r"]
+            "linux": ["apt install sublist3r -y"]
         }
     },
     {
@@ -12,7 +12,7 @@
         "description": "subfinder is a subdomain discovery tool that discovers valid subdomains for websites.",
         "check_command": "subfinder --version",
         "installation": {
-            "linux": ["apt install subfinder"]
+            "linux": ["apt install subfinder -y"]
         }
     },
     {
@@ -20,15 +20,15 @@
         "description": "assetfinder is a tool designed to find domains and subdomains associated with a specific domain.",
         "check_command": "assetfinder --version",
         "installation": {
-            "linux": ["apt install assetfinder"]
+            "linux": ["apt install assetfinder -y"]
         }
     },
     {
         "name": "gobuster",
         "description": "Gobuster is a tool used to brute-force: URIs (directories and files) in web sites.",
-        "check_command": "gobuster --version",
+        "check_command": "gobuster version",
         "installation": {
-            "linux": ["apt install gobuster"]
+            "linux": ["apt install gobuster -y"]
         }
     },
     {
@@ -37,7 +37,7 @@
         "check_command": "katana -version",
         "installation": {
             "linux": [
-                "apt install golang-go",
+                "apt install golang-go -y",
                 "go install github.com/projectdiscovery/katana/cmd/katana@latest"
             ]
         },
