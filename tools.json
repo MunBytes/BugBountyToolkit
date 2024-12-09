@@ -32,9 +32,9 @@
         }
     },
     {
-        "name": "Amass",
+        "name": "katana",
         "description": "In-depth DNS enumeration and network mapping.",
-        "check_command": "amass -version",
+        "check_command": "katana -version",
         "installation": {
             "linux": [
                 "apt install golang-go",
