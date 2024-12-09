@@ -1,0 +1,48 @@
+[
+    {
+        "name": "sublist3r",
+        "description": "sublist3r is security tool designed to enumerate subdomains of websites using OSINT.",
+        "check_command": "sublist3r --version",
+        "installation": {
+            "linux": ["apt install sublist3r"]
+        }
+    },
+    {
+        "name": "subfinder",
+        "description": "subfinder is a subdomain discovery tool that discovers valid subdomains for websites.",
+        "check_command": "subfinder --version",
+        "installation": {
+            "linux": ["apt install subfinder"]
+        }
+    },
+    {
+        "name": "assetfinder",
+        "description": "assetfinder is a tool designed to find domains and subdomains associated with a specific domain.",
+        "check_command": "assetfinder --version",
+        "installation": {
+            "linux": ["apt install assetfinder"]
+        }
+    },
+    {
+        "name": "gobuster",
+        "description": "Gobuster is a tool used to brute-force: URIs (directories and files) in web sites.",
+        "check_command": "gobuster --version",
+        "installation": {
+            "linux": ["apt install gobuster"]
+        }
+    },
+    {
+        "name": "Amass",
+        "description": "In-depth DNS enumeration and network mapping.",
+        "check_command": "amass -version",
+        "installation": {
+            "linux": [
+                "apt install golang-go",
+                "go install github.com/projectdiscovery/katana/cmd/katana@latest"
+            ]
+        },
+        "post_install": {
+            "linux": ["cp ~/go/bin/katana /bin/"]
+        }
+    }
+]
