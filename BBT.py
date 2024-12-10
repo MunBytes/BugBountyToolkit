@@ -22,6 +22,7 @@ CONFIG_FILE = "tools.json"
 
 """
 
+executed_steps = set()
 
 
 def load_config():
@@ -33,12 +34,17 @@ def load_config():
 
 
 def run_command(command):
+    if command in executed_steps:
+        print(f"[INFO] Skipping already executed step: {command}")
+        return
     try:
         print(f"[INFO] Running: {command}")
         subprocess.run(command, shell=True, check=True)
+        executed_steps.add(command)
     except subprocess.CalledProcessError as e:
         print(f"[ERROR] Command failed: {command}\n{e}")
         sys.exit(1)
+
 
 def is_tool_installed(check_command):
     try:
@@ -46,6 +52,7 @@ def is_tool_installed(check_command):
         return True
     except subprocess.CalledProcessError:
         return False
+
 
 def install_tool(tool):
     print(f"\n[INFO] Checking if {tool['name']} is already installed...")
@@ -72,7 +79,6 @@ def install_tool(tool):
         for step in tool['post_install'][os_type]:
             run_command(step)
         print(f"[SUCCESS] Post-installation completed for {tool['name']}!")
-
 
 
 
@@ -109,9 +115,6 @@ def main():
         else:
             print("[ERROR] No valid tools selected. Exiting.")
             sys.exit(1)
-
-
-
 
 
 
