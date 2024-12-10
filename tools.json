@@ -31,6 +31,16 @@
             "linux": ["apt install gobuster -y"]
         }
     },
+
+    {
+        "name": "nuclei",
+        "description": "Nuclei is used to send requests across targets based on a template.",
+        "check_command": "nuclei --version",
+        "installation": {
+            "linux": ["apt install nuclei -y"]
+        }
+    },
+
     {
         "name": "katana",
         "description": "In-depth DNS enumeration and network mapping.",
@@ -42,7 +52,27 @@
             ]
         },
         "post_install": {
-            "linux": ["cp ~/go/bin/katana /bin/"]
+            "linux": ["cp ~/go/bin/katana /usr/local/bin/"]
+        }
+    },
+
+    {
+        "name": "waybackurls",
+        "description": "Fetch all the URLs that the Wayback Machine knows about for a domain.",
+        "check_command": "waybackurls -h",
+        "installation": {
+            "linux": [
+                "apt install golang-go -y",
+                "go install github.com/tomnomnom/waybackurls@latest"
+            ]
+        },
+        "post_install": {
+            "linux": ["cp ~/go/bin/waybackurls /usr/local/bin/"]
         }
     }
+
+
+
+
+
 ]
