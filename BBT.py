@@ -25,6 +25,14 @@ CONFIG_FILE = "tools.json"
 executed_steps = set()
 
 
+
+def clear_screen():
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
+
+
 def load_config():
     if not os.path.exists(CONFIG_FILE):
         print(f"[ERROR] Configuration file '{CONFIG_FILE}' not found!")
@@ -55,6 +63,8 @@ def is_tool_installed(check_command):
 
 
 def install_tool(tool):
+    print(tool)
+    return
     print(f"\n[INFO] Checking if {tool['name']} is already installed...")
     if 'check_command' in tool and is_tool_installed(tool['check_command']):
         print(f"[INFO] {tool['name']} is already installed. Skipping installation.")
@@ -83,31 +93,42 @@ def install_tool(tool):
 
 
 def list_tools(tools):
+    clear_screen()
     print("\nAvailable tools:")
     for idx, tool in enumerate(tools, 1):
-        print(f"{idx}. {tool['name']} - {tool['description']}")
+        print(f"[{idx}]. {tool['name']} - {tool['description']}")
 
+
+def get_user_input(prompt):
+    while True:
+        user_input = input(prompt).strip()
+        if user_input:
+            return user_input
+        print("[ERROR] Input cannot be empty. Please try again.")
 
 def main():
     tools = load_config()
     list_tools(tools)
-    choice = input("\nEnter the number(s) of the tool(s) to install (comma-separated), or 'all' for everything: ").strip()
-    if not choice:
-        print(f"Quitting...\n")
-        sys.exit(0)
-
+    choice = get_user_input("\n[?] Enter the number(s) of the tool(s) to install (comma-separated), 'all' for everything, or 'q' to exit: ")
+    
     if choice.lower() == 'all':
         for tool in tools:
             install_tool(tool)
+    elif choice.lower() == 'q':
+        print("Exiting program. Goodbye!")
+        sys.exit(0)
     else:
         selected_tools = []
         for item in choice.split(','):
             item = item.strip()
-            index = int(item) - 1
-            if 0 <= index < len(tools):
-                selected_tools.append(tools[index])
-            else:
-                print(f"[ERROR] Invalid tool number: {item}")
+            try:
+                index = int(item) - 1
+                if 0 <= index < len(tools):
+                    selected_tools.append(tools[index])
+                else:
+                    print(f"[ERROR] Invalid tool number: {item}")
+            except ValueError:
+                print(f"[ERROR] '{item}' is not a valid number. Please enter integers only.")
 
         if selected_tools:
             for tool in selected_tools:
