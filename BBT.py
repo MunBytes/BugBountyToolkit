@@ -35,7 +35,7 @@ def clear_screen():
 
 def load_config():
     if not os.path.exists(CONFIG_FILE):
-        print(f"[ERROR] Configuration file '{CONFIG_FILE}' not found!")
+        print(f"[!] ERROR Configuration file '{CONFIG_FILE}' not found!")
         sys.exit(1)
     with open(CONFIG_FILE, 'r') as f:
         return json.load(f)
@@ -50,7 +50,7 @@ def run_command(command):
         subprocess.run(command, shell=True, check=True)
         executed_steps.add(command)
     except subprocess.CalledProcessError as e:
-        print(f"[ERROR] Command failed: {command}\n{e}")
+        print(f"[!] ERROR Command failed: {command}\n{e}")
         sys.exit(1)
 
 
@@ -63,8 +63,6 @@ def is_tool_installed(check_command):
 
 
 def install_tool(tool):
-    print(tool)
-    return
     print(f"\n[INFO] Checking if {tool['name']} is already installed...")
     if 'check_command' in tool and is_tool_installed(tool['check_command']):
         print(f"[INFO] {tool['name']} is already installed. Skipping installation.")
@@ -73,7 +71,7 @@ def install_tool(tool):
     print(f"[INFO] Installing {tool['name']}...")
     os_type = platform.system().lower()
     if os_type not in tool['installation']:
-        print(f"[ERROR] OS not supported for {tool['name']}")
+        print(f"[!] ERROR OS not supported for {tool['name']}")
         return
 
     steps = tool['installation'][os_type]
@@ -104,7 +102,7 @@ def get_user_input(prompt):
         user_input = input(prompt).strip()
         if user_input:
             return user_input
-        print("[ERROR] Input cannot be empty. Please try again.")
+        print("[!] ERROR Input cannot be empty. Please try again.")
 
 def main():
     tools = load_config()
@@ -126,15 +124,15 @@ def main():
                 if 0 <= index < len(tools):
                     selected_tools.append(tools[index])
                 else:
-                    print(f"[ERROR] Invalid tool number: {item}")
+                    print(f"[!] ERROR Invalid tool number: {item}")
             except ValueError:
-                print(f"[ERROR] '{item}' is not a valid number. Please enter integers only.")
+                print(f"[!] ERROR '{item}' is not a valid number. Please enter integers only.")
 
         if selected_tools:
             for tool in selected_tools:
                 install_tool(tool)
         else:
-            print("[ERROR] No valid tools selected. Exiting.")
+            print("[!] ERROR No valid tools selected. Exiting.")
             sys.exit(1)
 
 

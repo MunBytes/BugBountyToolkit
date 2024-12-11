@@ -18,7 +18,7 @@
     {
         "name": "assetfinder",
         "description": "assetfinder is a tool designed to find domains and subdomains associated with a specific domain.",
-        "check_command": "assetfinder --version",
+        "check_command": "assetfinder -h",
         "installation": {
             "linux": ["apt install assetfinder -y"]
         }
@@ -40,6 +40,13 @@
             "linux": ["apt install nuclei -y"]
         }
     },
+
+
+
+
+
+
+
 
     {
         "name": "katana",
