@@ -18,7 +18,7 @@ script for bug bounty hunters to install and configure essential tools effortles
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/RecursiveCipher/BugBountyToolkit.git
+   git clone https://github.com/MunBytes/BugBountyToolkit.git
    cd BugBountyToolkit
    ```
 
